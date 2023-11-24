@@ -1,0 +1,18 @@
+[submodule "external/jsx"]
+	path = external/jsx
+	url = git@github.com:jonpalmisc/jsx.git
+[submodule "external/sioku"]
+	path = external/sioku
+	url = git@github.com:jonpalmisc/sioku.git
+[submodule "external/argh"]
+	path = external/argh
+	url = git@github.com:adishavit/argh.git
+[submodule "external/linenoise"]
+	path = external/linenoise
+	url = git@github.com:jonpalmisc/linenoise.git
+[submodule "external/lua"]
+	path = external/lua
+	url = git@github.com:jonpalmisc/cmake_lua.git
+[submodule "external/sol2"]
+	path = external/sol2
+	url = git@github.com:ThePhD/sol2.git
