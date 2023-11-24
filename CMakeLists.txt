@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(respawn VERSION 0.1.0)
+project(respawn VERSION 1.0.1)
 
 add_subdirectory(external/argh EXCLUDE_FROM_ALL)
 add_subdirectory(external/sioku EXCLUDE_FROM_ALL)
@@ -21,6 +21,8 @@ add_executable(respawn
   src/repl.cpp
   src/usb/client.cpp)
 target_compile_features(respawn PRIVATE cxx_std_17)
+target_compile_definitions(respawn PRIVATE
+  CMAKE_PROJECT_VERSION="${CMAKE_PROJECT_VERSION}")
 target_include_directories(respawn PRIVATE include)
 target_link_libraries(respawn PRIVATE 
   argh

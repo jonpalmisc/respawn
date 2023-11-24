@@ -15,7 +15,12 @@
 
 #include <iostream>
 
-constexpr auto USAGE = R"(Usage: respawn [-spIrvVh]
+#ifndef CMAKE_PROJECT_VERSION
+#define CMAKE_PROJECT_VERSION "?.?.?"
+#endif
+
+constexpr auto USAGE = R"(
+Usage: respawn [-spIrvVh]
 
 Options:
   -s, --serial          Only print the device's serial, then exit
@@ -60,6 +65,8 @@ static Chip parse_cpid(const std::string &serial) {
 int main(int argc, char const **argv) {
   argh::parser args(argc, argv, argh::parser::SINGLE_DASH_IS_MULTIFLAG);
   if (args[{"-h", "--help"}]) {
+    std::cout << "Respawn " CMAKE_PROJECT_VERSION
+              << " <https://github.com/jonpalmisc/respawn>\n";
     std::cout << USAGE;
     return 0;
   }
