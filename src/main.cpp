@@ -58,6 +58,8 @@ static Chip parse_cpid(const std::string &serial) {
     return Chip::S8000;
   if (serial.find("CPID:8003") != std::string::npos)
     return Chip::S8003;
+  if (serial.find("CPID:8015") != std::string::npos)
+    return Chip::T8015;
 
   return Chip::Invalid;
 }
@@ -98,6 +100,12 @@ int main(int argc, char const **argv) {
   if (chip == Chip::Invalid) {
     jsx::log_error("Error: Unsupported device.");
     return 1;
+  }
+
+  if (chip == Chip::T8015) {
+    jsx::log_warn("Implant installation and REPL are not supported on T8015!");
+    flag_no_implant = true;
+    flag_repl = false;
   }
 
   auto state = detect_device_state(usb_client);

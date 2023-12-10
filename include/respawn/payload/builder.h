@@ -26,9 +26,14 @@ public:
   /// Get the "overwrite size" used for placement of the bootstrap payload.
   static uint32_t overwrite_size(Chip chip);
 
+  /// Create the overwrite payload.
+  static std::vector<uint8_t> make_overwrite(Chip chip);
+
   /// Create the initial exploit/bootstrapping payload.
   static std::vector<uint8_t> make_bootstrap(Chip chip);
 
   /// Create the implant payload.
   static std::vector<uint8_t> make_implant();
+
+  static std::vector<uint8_t> make_payload_t8015_refactor_this();
 };

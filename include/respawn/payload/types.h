@@ -71,3 +71,10 @@ struct RomHeapBlock {
 
   uint8_t _c[0x30];
 };
+
+struct RomUsbDeviceIoRequest {
+  uint32_t _a[8];
+
+  uint64_t callback;
+  uint64_t next;
+};

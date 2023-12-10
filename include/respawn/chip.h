@@ -14,4 +14,5 @@ enum class Chip {
   T7000 = 0x7000, // A8
   S8000 = 0x8000, // A9, Samsung
   S8003 = 0x8003, // A9, TSMC
+  T8015 = 0x8015, // A11
 };
