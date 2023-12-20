@@ -38,31 +38,31 @@ struct OffsetsA8A9 {
 };
 
 constexpr OffsetsA8A9 offsets_t7000 = {
-    .io_buffer = 0x18010D300,
-    .arch_task_tramp_fn = 0x10000D988,
+    .io_buffer = 0x18010d300,
+    .arch_task_tramp_fn = 0x10000d988,
     .synopsys_routine_fn = 0x100005530,
     .dfu_base = 0x180380000,
-    .serial = 0x1800888C8,
-    .usb_serial_desc = 0x18008062A,
+    .serial = 0x1800888c8,
+    .usb_serial_desc = 0x18008062a,
     .dfu_handle_request_fn_ptr = 0x180088878,
-    .copy_dest = 0x1800E0C00,
+    .copy_dest = 0x1800e0c00,
     .usb_transfer_fn = 0x10000ebb4,
-    .chipid_base = 0x20E02A000,
-    .usb_create_desc_fn = 0x10000E074,
+    .chipid_base = 0x20e02a000,
+    .usb_create_desc_fn = 0x10000e074,
 };
 
 constexpr OffsetsA8A9 offsets_s8000 = {
-    .io_buffer = 0x18010D500,
-    .arch_task_tramp_fn = 0x10000D998,
+    .io_buffer = 0x18010d500,
+    .arch_task_tramp_fn = 0x10000d998,
     .synopsys_routine_fn = 0x100006718,
     .dfu_base = 0x180380000,
     .serial = 0x180087958,
-    .usb_serial_desc = 0x1800807DA,
-    .dfu_handle_request_fn_ptr = 0x1800878F8,
-    .copy_dest = 0x1800E0C00,
-    .usb_transfer_fn = 0x10000EE78,
-    .chipid_base = 0x2102BC000,
-    .usb_create_desc_fn = 0x10000E354,
+    .usb_serial_desc = 0x1800807da,
+    .dfu_handle_request_fn_ptr = 0x1800878f8,
+    .copy_dest = 0x1800e0c00,
+    .usb_transfer_fn = 0x10000ee78,
+    .chipid_base = 0x2102bc000,
+    .usb_create_desc_fn = 0x10000e354,
 };
 
 struct OffsetsT8015 {
