@@ -11,6 +11,8 @@
 	.set usb_serial_desc,		0x1800008FA
 	.set cfg_fuse0_raw,		0x2352BC000
 
+#define I_WANT_TO_CRASH 1
+
 bootstrap:
 	stp	x29, x30, [sp, #-0x10]!
 
@@ -29,6 +31,12 @@ L__find_serial_terminator:
 	blr	x1
 	ldr	x1, =usb_serial_desc
 	strb	w0, [x1]
+
+#if I_WANT_TO_CRASH
+	// The page tables are fucked, this will not work!
+	ldr	x29, =cfg_fuse0_raw
+	str	xzr, [x29]
+#endif
 
 	ldp	x29, x30, [sp], #0x10
 	ret
