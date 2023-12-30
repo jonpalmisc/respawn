@@ -35,9 +35,7 @@ def quad_literal(value: int, nl=True) -> str:
     return f"\t.quad {hex(value)}" + ("\n" if nl else "")
 
 
-def expand_rop_chain(
-    base: int, func_gadget: int, callbacks: list[tuple[int, int]]
-) -> str:
+def expand_rop_chain(base: int, callbacks: list[tuple[int, int]]) -> str:
     result = ""
 
     for i in range(0, len(callbacks), 5):
@@ -74,7 +72,6 @@ print("\t;; *** Do not edit; see `tools/make_rop.py` to re-generate! ***\n")
 print(
     expand_rop_chain(
         vars.dfu_base,
-        vars.func_gadget,
         [
             (vars.demote, 0),
             (vars.write_ttbr0_fn, vars.dfu_base),

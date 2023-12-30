@@ -36,7 +36,6 @@ target_link_libraries(respawn PRIVATE
 include(cmake/Payload.cmake)
 add_payload(respawn src/payload/bootstrap.s)
 add_payload(respawn src/payload/implant.s)
-add_payload(respawn src/payload/t8015_preamble.s)
 add_payload(respawn src/payload/t8015_bootstrap.s)
 
 install(TARGETS respawn DESTINATION .)

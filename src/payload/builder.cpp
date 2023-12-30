@@ -191,9 +191,8 @@ std::vector<uint8_t> PayloadBuilder::make_implant() {
 }
 
 std::vector<uint8_t> PayloadBuilder::make_payload_t8015_refactor_this() {
-  uint8_t data[t8015_preamble_len + t8015_bootstrap_len];
-  std::memcpy(data, t8015_preamble, t8015_preamble_len);
-  std::memcpy(data + t8015_preamble_len, t8015_bootstrap, t8015_bootstrap_len);
+  uint8_t data[t8015_bootstrap_len];
+  std::memcpy(data, t8015_bootstrap, t8015_bootstrap_len);
 
   return {data, data + sizeof(data)};
 }
